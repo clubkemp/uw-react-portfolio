@@ -75,7 +75,7 @@ export default function About (){
     <Grid container>
         <Grid item lg={2}/>
         <Grid item lg={8}>
-        <Grid container spacing={5}>
+        <Grid container spacing={5} justify="center">
             <Grid container justify="center">
                 <h2>Portfolio</h2>
             </Grid>
