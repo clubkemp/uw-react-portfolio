@@ -8,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid'
 import About from './components/pages/About'
+import Portfolio from './components/pages/Portfolio'
+import Contact from './components/pages/Contact'
+import ContactCard from './components/ContactCard'
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -50,15 +53,30 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+
 }));
 
-export default function SimpleTabs() {
+export default function App() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const [page, setPage] =React.useState("about");
+  const [open, setOpen] = React.useState(false);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    if(newValue === 0){
+      setPage("about")
+    }else if(newValue === 1){
+      setPage("portfolio")
+    }
   };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleToggle = () => {
+    setOpen(!open);
+  };
+  
 
   return (
     <div className={classes.root}>
@@ -68,7 +86,7 @@ export default function SimpleTabs() {
             <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
               <Tab label="About" {...a11yProps(0)} />
               <Tab label="Portfolio" {...a11yProps(1)} />
-              <Tab label="Contact" {...a11yProps(2)} />
+              <Tab label="Contact" {...a11yProps(2)} onClick={handleToggle}/>
             </Tabs>
           </Grid>
           <Grid item xs={0} sm={1} alignItems="center" justifyContent="center">
@@ -82,11 +100,30 @@ export default function SimpleTabs() {
         <About />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        {/* <Portfolio /> */}
+        <Portfolio />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        {/* <Contact /> */}
+        {page ==="about" ? <About /> : <Portfolio />}
+        <Contact open={open} handleClose={handleClose}/>
       </TabPanel>
     </div>
   );
 }
+
+
+
+
+
+// export default function SimpleBackdrop() {
+//   const classes = useStyles();
+  
+
+//   return (
+//     <div>
+//       <Button variant="outlined" color="primary" onClick={handleToggle}>
+//         Show backdrop
+//       </Button>
+//       
+//     </div>
+//   );
+// }

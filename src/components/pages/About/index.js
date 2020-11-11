@@ -1,6 +1,6 @@
 import React from 'react'
 import Grid from '@material-ui/core/Grid'
-import bananas from './bananas.jpg'
+import bananas from '../../../images/bananas.jpg'
 import AboutCard from '../../AboutCard'
 
 export default function About (){
